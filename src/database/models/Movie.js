@@ -31,6 +31,21 @@ module.exports = (sequelize, DataTypes) => {
         genre_id: {
             type: DataTypes.INTEGER(10).UNSIGNED
         }
+
+    }
+
+    let config = {
+        tableName: "Movies",
+        timestamos: true
+    }
+
+    const Movie = sequelize.define(alias, cols, config);
+
+    Movie.associate = models => {
+        Movie.belongsTo(models.Genres, {
+            as: "genre",
+            foreignKey: "genre_id"
+        })
     }
     let config= {
         tableName: "Movies",
